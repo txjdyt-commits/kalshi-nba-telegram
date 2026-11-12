@@ -1,0 +1,6 @@
+__pycache__/
+state/
+.env
+.env.*
+config.json
+*.sqlite3*
