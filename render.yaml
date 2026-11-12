@@ -1,0 +1,25 @@
+services:
+  - type: worker
+    name: kalshi-nba-telegram
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: python -m unittest -q
+    startCommand: python -u bot.py
+    numInstances: 1
+    disk:
+      name: nba-alert-state
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: PAIRING_CODE
+        generateValue: true
+      - key: STATE_DIR
+        value: /var/data/nba-alerts
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: THRESHOLD
+        value: '0.75'
+      - key: POLL_SECONDS
+        value: '30'
